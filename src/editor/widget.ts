@@ -6,7 +6,7 @@ import { UUID, MimeData } from '@lumino/coreutils';
 import { ArrayExt } from '@lumino/algorithm';
 import { Message } from '@lumino/messaging';
 import { Drag } from './drag';
-import { Dashboard } from './dashboard';
+import { DashboardArea } from './dashboard';
 import { getNotebookId, getCellId, getNotebookById, getCellById } from './utils';
 import { Signal, ISignal } from '@lumino/signaling';
 import { WidgetStore, WidgetPosition } from './widgetStore';
@@ -263,7 +263,7 @@ export class DashboardWidget extends Widget {
     }
 
     if (pos !== oldPos) {
-      (this.parent as Dashboard).updateWidget(this, pos);
+      (this.parent as DashboardArea).updateWidget(this, pos);
     }
   }
 
@@ -537,7 +537,7 @@ export class DashboardWidget extends Widget {
 
     if (this._mouseMode === 'resize' && this.parent !== undefined) {
       const pos = this.pos;
-      (this.parent as Dashboard).updateWidget(this, pos);
+      (this.parent as DashboardArea).updateWidget(this, pos);
     }
 
     this._mouseMode = 'none';
@@ -644,10 +644,10 @@ export class DashboardWidget extends Widget {
   /**
    * The widget's display mode.
    */
-  get mode(): Dashboard.Mode {
+  get mode(): DashboardArea.Mode {
     return this._mode;
   }
-  set mode(newMode: Dashboard.Mode) {
+  set mode(newMode: DashboardArea.Mode) {
     this._mode = newMode;
     if (newMode === 'present') {
       this.removeClass(EDITABLE_WIDGET_CLASS);
@@ -656,7 +656,7 @@ export class DashboardWidget extends Widget {
     }
     if (newMode === 'grid-edit') {
       if (this.parent) {
-        (this.parent as Dashboard).updateWidget(this, this.pos);
+        (this.parent as DashboardArea).updateWidget(this, this.pos);
       }
     }
   }
@@ -696,7 +696,7 @@ export class DashboardWidget extends Widget {
   private _ready = new Signal<this, void>(this);
   private _fitToContent = false;
   private _mouseMode: DashboardWidget.MouseMode = 'none';
-  private _mode: Dashboard.Mode = 'grid-edit';
+  private _mode: DashboardArea.Mode = 'grid-edit';
   private _drag: Drag | null = null;
   private _clickData: ClickData | null = null;
   private _locked = false;

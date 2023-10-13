@@ -5,7 +5,7 @@ import { Signal } from '@lumino/signaling';
 import { DocumentRegistry } from '@jupyterlab/docregistry';
 import { IChangedArgs } from '@jupyterlab/coreutils';
 import { WidgetTracker } from '@jupyterlab/apputils';
-import { Dashboard } from './dashboard';
+import { DashboardArea } from './dashboard';
 import { DashboardWidget } from './widget';
 import { WidgetStore, WidgetPosition } from './widgetStore';
 
@@ -111,7 +111,7 @@ export class DashboardLayout extends Layout {
    */
   onAfterAttach(msg: Message): void {
     super.onAfterAttach(msg);
-    this._dashboard = this.parent as Dashboard;
+    this._dashboard = this.parent as DashboardArea;
     if (this.mode === 'grid-edit') {
       this.setTileSize(this.tileSize);
     }
@@ -664,7 +664,7 @@ export class DashboardLayout extends Layout {
     direction: DashboardWidget.Direction,
     amount: number
   ): void {
-    const model = (this.parent as Dashboard).model;
+    const model = (this.parent as DashboardArea).model;
     const widgets = toArray(this);
 
     switch (direction) {
@@ -728,7 +728,7 @@ export class DashboardLayout extends Layout {
    *
    * @param newMode - the new mode (present, free, or tile).
    */
-  setMode(newMode: Dashboard.Mode): void {
+  setMode(newMode: DashboardArea.Mode): void {
     this._mode = newMode;
     this.clearCanvas();
     each(this, _widget => {
@@ -759,7 +759,7 @@ export class DashboardLayout extends Layout {
   /**
    * The display mode for the dashboard (present, free, or tile).
    */
-  get mode(): Dashboard.Mode {
+  get mode(): DashboardArea.Mode {
     return this._mode;
   }
 
@@ -888,7 +888,7 @@ export class DashboardLayout extends Layout {
    * bottom of the content).
    */
   trimDashboard(): void {
-    const model = (this.parent as Dashboard).model;
+    const model = (this.parent as DashboardArea).model;
     let maxWidth = 0;
     let maxHeight = 0;
 
@@ -925,9 +925,9 @@ export class DashboardLayout extends Layout {
   // Dashboard height (zero if unconstrained).
   private _height: number;
   // Mode (either interactive or edit);
-  private _mode: Dashboard.Mode;
+  private _mode: DashboardArea.Mode;
   // Parent dashboard.
-  private _dashboard?: Dashboard;
+  private _dashboard?: DashboardArea;
   // Size of a single tile in tiled layout in pixels.
   private _tileSize = DashboardLayout.DEFAULT_TILE_SIZE;
   // Changed signal
@@ -973,7 +973,7 @@ export namespace DashboardLayout {
     /**
      * The layout mode (either interactive or edit).
      */
-    mode: Dashboard.Mode;
+    mode: DashboardArea.Mode;
 
     /**
      * The dashboard model (used for updating metadata).

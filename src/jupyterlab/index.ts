@@ -11,11 +11,11 @@ import { IDocumentManager } from '@jupyterlab/docmanager';
 import { CodeCell } from '@jupyterlab/cells';
 import { INotebookTracker } from '@jupyterlab/notebook';
 import { undoIcon, redoIcon, copyIcon, cutIcon, pasteIcon, runIcon, saveIcon } from '@jupyterlab/ui-components';
-import { DashboardIcons } from '../editor/icons';
+import { dashboardGreenIcon, dashboardGreyIcon, editIcon, viewIcon } from '../editor/icons';
 import notebookHeaderPlugin from '../notebook/header/plugin';
 import classicRenderPlugin from '../notebook/classic/plugin';
 import viewerPlugin from '../notebook/viewer/plugin';
-import { Dashboard, DashboardDocumentFactory, DashboardTracker, IDashboardTracker } from '../editor/dashboard';
+import { DashboardArea, DashboardDocumentFactory, DashboardTracker, IDashboardTracker } from '../editor/dashboard';
 import { DashboardWidget } from '../editor/widget';
 import { DashboardModel, DashboardModelFactory } from '../editor/model';
 import { CommandIDs } from '../editor/commands';
@@ -53,12 +53,12 @@ const dashboardHomePlugin: JupyterFrontEndPlugin<void> = {
     commands.addCommand(command, {
       caption: 'Show Dashboard',
       label: 'Dashboard',
-      icon: DashboardIcons.dashboardGreen,
+      icon: dashboardGreyIcon,
       execute: () => {
         const content = new DashboardHomeWidget();
         const widget = new MainAreaWidget<DashboardHomeWidget>({ content });
         widget.title.label = 'Dashboard';
-        widget.title.icon = DashboardIcons.dashboardGreen;
+        widget.title.icon = dashboardGreyIcon;
         app.shell.add(widget, 'main');
         tracker.add(widget);
       }
@@ -69,7 +69,7 @@ const dashboardHomePlugin: JupyterFrontEndPlugin<void> = {
       launcher.add({
         command,
         category,
-        rank: 6.9,
+        rank: 6.7,
       });
     }
     if (settingRegistry) {
@@ -128,7 +128,7 @@ const dashboardTrackerPlugin: JupyterFrontEndPlugin<IDashboardTracker> = {
         '.dashboard',
       ],
       fileFormat: 'text',
-      icon: DashboardIcons.dashboardGreen,
+      icon: dashboardGreenIcon,
       iconLabel: 'Dashboard',
       mimeTypes: ['application/json']
     };
@@ -152,8 +152,8 @@ const dashboardTrackerPlugin: JupyterFrontEndPlugin<IDashboardTracker> = {
       const model = widget.content.model;
       // TODO: Make scrollMode changable in JL. Default 'infinite' for now.
       model.scrollMode = 'infinite';
-      model.width = Dashboard.DEFAULT_WIDTH;
-      model.height = Dashboard.DEFAULT_HEIGHT;
+      model.width = DashboardArea.DEFAULT_WIDTH;
+      model.height = DashboardArea.DEFAULT_HEIGHT;
     });
     app.contextMenu.addItem({
       command: CommandIDs.save,
@@ -295,7 +295,7 @@ const dashboardTrackerPlugin: JupyterFrontEndPlugin<IDashboardTracker> = {
 
 function addCommands(
   app: JupyterFrontEnd,
-  dashboardTracker: WidgetTracker<Dashboard>,
+  dashboardTracker: WidgetTracker<DashboardArea>,
   outputTracker: WidgetTracker<DashboardWidget>,
   clipboard: Set<WidgetStore.WidgetInfo>,
   docManager: IDocumentManager,
@@ -368,9 +368,9 @@ function addCommands(
     icon: args => {
       const mode = dashboardTracker.currentWidget?.model.mode || 'present';
       if (mode === 'present') {
-        return DashboardIcons.edit;
+        return editIcon;
       } else {
-        return DashboardIcons.view;
+        return viewIcon;
       }
     },
     label: args => {
@@ -406,8 +406,8 @@ function addCommands(
     label: 'Set Dashboard Dimensions',
     execute: async args => {
       const model = dashboardTracker.currentWidget?.model!;
-      const width = model.width ? model.width : Dashboard.DEFAULT_WIDTH;
-      const height = model.height ? model.height : Dashboard.DEFAULT_HEIGHT;
+      const width = model.width ? model.width : DashboardArea.DEFAULT_WIDTH;
+      const height = model.height ? model.height : DashboardArea.DEFAULT_HEIGHT;
       await showDialog({
         title: 'Enter Dimensions',
         body: new Private.ResizeHandler(width, height),
@@ -422,14 +422,14 @@ function addCommands(
         }
         if (!newWidth) {
           if (!model.width) {
-            newWidth = Dashboard.DEFAULT_WIDTH;
+            newWidth = DashboardArea.DEFAULT_WIDTH;
           } else {
             newWidth = model.width;
           }
         }
         if (!newHeight) {
           if (!model.height) {
-            newHeight = Dashboard.DEFAULT_HEIGHT;
+            newHeight = DashboardArea.DEFAULT_HEIGHT;
           } else {
             newHeight = model.height;
           }
@@ -481,7 +481,7 @@ function addCommands(
     icon: pasteIcon,
     execute: args => {
       const id = args.dashboardId;
-      let dashboard: Dashboard;
+      let dashboard: DashboardArea;
       if (id) {
         dashboard = dashboardTracker.find(widget => widget.id === id)!;
       } else {
@@ -509,7 +509,7 @@ function addCommands(
   });
   commands.addCommand(CommandIDs.createNew, {
     label: 'Dashboard',
-    icon: DashboardIcons.dashboardGreen,
+    icon: dashboardGreenIcon,
     execute: async args => {
       // A new file is created and opened separately to override the default
       // opening behavior when there's a notebook and open the dashboard in a
@@ -565,7 +565,7 @@ function addCommands(
         widgetStore,
         notebookTracker
       });
-      const dashboard = new Dashboard({
+      const dashboard = new DashboardArea({
         outputTracker,
         model
       });

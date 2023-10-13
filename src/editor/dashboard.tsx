@@ -32,15 +32,15 @@ export const IDashboardTracker = new Token<IDashboardTracker>(
   '@datalayer/jupyter-dashboard:tracker'
 );
 
-export type IDashboardTracker = IWidgetTracker<Dashboard>;
+export type IDashboardTracker = IWidgetTracker<DashboardArea>;
 
-export class DashboardTracker extends WidgetTracker<Dashboard> {}
+export class DashboardTracker extends WidgetTracker<DashboardArea> {}
 
 /**
- * Main content widget for the Dashboard widget.
+ * Main content area for the Dashboard widget.
  */
-export class Dashboard extends Widget {
-  constructor(options: Dashboard.IOptions) {
+export class DashboardArea extends Widget {
+  constructor(options: DashboardArea.IOptions) {
     super(options);
     this.id = UUID.uuid4();
     const { outputTracker, model } = options;
@@ -52,8 +52,8 @@ export class Dashboard extends Widget {
       outputTracker,
       model,
       mode,
-      width: options.dashboardWidth || Dashboard.DEFAULT_WIDTH,
-      height: options.dashboardHeight || Dashboard.DEFAULT_HEIGHT
+      width: options.dashboardWidth || DashboardArea.DEFAULT_WIDTH,
+      height: options.dashboardHeight || DashboardArea.DEFAULT_HEIGHT
     });
     widgetStore.connectDashboard(this);
     this._model.loaded.connect(this.updateLayoutFromWidgetStore, this);
@@ -127,14 +127,12 @@ export class Dashboard extends Widget {
     event.stopPropagation();
     const left = event.offsetX + this.node.scrollLeft;
     const top = event.offsetY + this.node.scrollTop;
-
     if (event.proposedAction === 'move') {
       const widget = event.source as DashboardWidget;
-      const oldDashboard = widget.parent as Dashboard;
+      const oldDashboard = widget.parent as DashboardArea;
       const width = widget.node.offsetWidth;
       const height = widget.node.offsetHeight;
       const pos = { left, top, width, height };
-
       if (oldDashboard === this) {
         // dragging in same dashboard.ono
         this.updateWidget(widget, pos);
@@ -152,7 +150,6 @@ export class Dashboard extends Widget {
         this.addWidget(newWidget, pos);
         oldDashboard.deleteWidget(widget);
       }
-
       // dragging from notebook -> dashboard.
     } else if (event.proposedAction === 'copy') {
       const notebook = event.source.parent as NotebookPanel;
@@ -162,7 +159,6 @@ export class Dashboard extends Widget {
       } else {
         cell = notebook.content.activeCell as CodeCell;
       }
-
       const info: WidgetStore.WidgetInfo = {
         widgetId: DashboardWidget.createDashboardWidgetId(),
         notebookId: addNotebookId(notebook),
@@ -181,7 +177,6 @@ export class Dashboard extends Widget {
     } else {
       return;
     }
-
     this.removeClass(DROP_TARGET_CLASS);
   }
 
@@ -358,9 +353,9 @@ export class Dashboard extends Widget {
 }
 
 /**
- * Namespace for DashboardArea options.
+ * Namespace for DashboardPanel options.
  */
-export namespace Dashboard {
+export namespace DashboardArea {
   export type Mode = 'free-edit' | 'present' | 'grid-edit';
 
   export type ScrollMode = 'infinite' | 'constrained';
@@ -392,17 +387,17 @@ export namespace Dashboard {
   }
 }
 
-export class DashboardDocument extends DocumentWidget<Dashboard> {
+export class DashboardDocument extends DocumentWidget<DashboardArea> {
   constructor(options: DashboardDocument.IOptions) {
     let { content, reveal } = options;
     const { context, commandRegistry } = options;
     const model = context.model as DashboardModel;
     model.path = context.path;
-    content = content || new Dashboard({ ...options, model, context });
+    content = content || new DashboardArea({ ...options, model, context });
     reveal = Promise.all([reveal, context.ready]);
     super({
       ...options,
-      content: content as Dashboard,
+      content: content as DashboardArea,
       reveal
     });
     // Build the toolbar
@@ -436,7 +431,7 @@ export class DashboardDocument extends DocumentWidget<Dashboard> {
     this.toolbar.addItem('spacer', Toolbar.createSpacerItem());
     this.toolbar.addItem(
       'switchMode',
-      new DashboardDocument.DashboardModeSwitcher(content as Dashboard)
+      new DashboardDocument.DashboardModeSwitcher(content as DashboardArea)
     );
   }
 }
@@ -475,7 +470,7 @@ export namespace DashboardDocument {
   }
 
   export class DashboardModeSwitcher extends ReactWidget {
-    constructor(dashboard: Dashboard) {
+    constructor(dashboard: DashboardArea) {
       super();
       this.addClass(TOOLBAR_MODE_SWITCHER_CLASS);
       this._dashboard = dashboard;
@@ -495,7 +490,7 @@ export namespace DashboardDocument {
       that: DashboardModeSwitcher
     ): (event: React.ChangeEvent<HTMLSelectElement>) => void {
       return (event: React.ChangeEvent<HTMLSelectElement>): void => {
-        that.dashboard.model.mode = event.target.value as Dashboard.Mode;
+        that.dashboard.model.mode = event.target.value as DashboardArea.Mode;
       };
     }
 
@@ -515,11 +510,11 @@ export namespace DashboardDocument {
       );
     }
 
-    get dashboard(): Dashboard {
+    get dashboard(): DashboardArea {
       return this._dashboard;
     }
 
-    private _dashboard: Dashboard;
+    private _dashboard: DashboardArea;
   }
 }
 

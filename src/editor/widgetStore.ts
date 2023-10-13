@@ -1,6 +1,6 @@
 import { Cell } from '@jupyterlab/cells';
 import { INotebookTracker, NotebookPanel } from '@jupyterlab/notebook';
-import { Dashboard } from './dashboard';
+import { DashboardArea } from './dashboard';
 import DashboardWidget from './widget';
 import { getNotebookById, getCellById } from './utils';
 import { IDashboardChange, DashboardLayout } from './layout';
@@ -44,7 +44,7 @@ export class WidgetStore {
    * Start listening for changes to a dashboard and automatically
    * reflect them in the datastore.
    */
-  connectDashboard(dashboard: Dashboard): void {
+  connectDashboard(dashboard: DashboardArea): void {
     const layout = dashboard.layout as DashboardLayout;
     layout.changed.connect((layout, changes) =>
       this._handleChanges(layout, changes)
@@ -54,7 +54,7 @@ export class WidgetStore {
   /**
    * Stop listening for changes to a dashboard.
    */
-  disconnectDashboard(dashboard: Dashboard): void {
+  disconnectDashboard(dashboard: DashboardArea): void {
     const layout = dashboard.layout as DashboardLayout;
     layout.changed.disconnect((layout, changes) =>
       this._handleChanges(layout, changes)
@@ -68,7 +68,7 @@ export class WidgetStore {
     layout: DashboardLayout,
     changes: IDashboardChange[]
   ): void {
-    (layout.parent as Dashboard).model.dirty = true;
+    (layout.parent as DashboardArea).model.dirty = true;
 
     for (const change of changes) {
       const { widgetId, pos, ignore } = change;

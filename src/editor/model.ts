@@ -8,7 +8,7 @@ import { IModelDB, IObservableJSON, ObservableJSON } from '@jupyterlab/observabl
 import { YFile } from '@jupyter/ydoc';
 import { IDashboardContent, IDashboardMetadata, DASHBOARD_VERSION, IOutputInfo } from './content';
 import { WidgetStore } from './widgetStore';
-import { Dashboard, } from './dashboard';
+import { DashboardArea, } from './dashboard';
 import { getPathFromNotebookId, getNotebookById } from './utils';
 import { DashboardWidget } from './widget';
 
@@ -44,7 +44,7 @@ export interface IDashboardModel extends DocumentRegistry.IModel {
   /**
    * The display mode of the dashboard.
    */
-  mode: Dashboard.Mode;
+  mode: DashboardArea.Mode;
 
   /**
    * The name of the dashboard.
@@ -64,7 +64,7 @@ export interface IDashboardModel extends DocumentRegistry.IModel {
   /**
    * The scroll mode of the dashboard.
    */
-  scrollMode: Dashboard.ScrollMode;
+  scrollMode: DashboardArea.ScrollMode;
 
   /**
    * The current path associated with the model.
@@ -225,10 +225,10 @@ export class DashboardModel extends DocumentModel implements IDashboardModel {
   /**
    * The display mode of the dashboard.
    */
-  get mode(): Dashboard.Mode {
+  get mode(): DashboardArea.Mode {
     return this._mode;
   }
-  set mode(newValue: Dashboard.Mode) {
+  set mode(newValue: DashboardArea.Mode) {
     const oldValue = this._mode;
     if (oldValue === newValue) {
       return;
@@ -306,10 +306,10 @@ export class DashboardModel extends DocumentModel implements IDashboardModel {
   /**
    * The scroll mode of the dashboard.
    */
-  get scrollMode(): Dashboard.ScrollMode {
+  get scrollMode(): DashboardArea.ScrollMode {
     return this._scrollMode;
   }
-  set scrollMode(newValue: Dashboard.ScrollMode) {
+  set scrollMode(newValue: DashboardArea.ScrollMode) {
     this._scrollMode = newValue;
   }
 
@@ -340,8 +340,8 @@ export class DashboardModel extends DocumentModel implements IDashboardModel {
 
   protected _metadata: IObservableJSON = new ObservableJSON();
   protected _loaded = new Signal<this, void>(this);
-  private _mode: Dashboard.Mode = 'grid-edit';
-  private _scrollMode: Dashboard.ScrollMode = 'constrained';
+  private _mode: DashboardArea.Mode = 'grid-edit';
+  private _scrollMode: DashboardArea.ScrollMode = 'constrained';
   private _path: string = '';
   private _restore = false;
 }
