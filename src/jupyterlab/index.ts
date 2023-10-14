@@ -11,7 +11,7 @@ import { IDocumentManager } from '@jupyterlab/docmanager';
 import { CodeCell } from '@jupyterlab/cells';
 import { INotebookTracker } from '@jupyterlab/notebook';
 import { undoIcon, redoIcon, copyIcon, cutIcon, pasteIcon, runIcon, saveIcon } from '@jupyterlab/ui-components';
-import { dashboardGreenIcon, dashboardGreyIcon, editIcon, viewIcon } from '../editor/icons';
+import { dashboardGreenIcon, dashboardOutlineGreyIcon, editIcon, viewIcon } from '../editor/icons';
 import notebookHeaderPlugin from '../notebook/plugin';
 import { DashboardArea, DashboardDocumentFactory, DashboardTracker, IDashboardTracker } from '../editor/dashboard';
 import { DashboardWidget } from '../editor/widget';
@@ -51,12 +51,12 @@ const dashboardHomePlugin: JupyterFrontEndPlugin<void> = {
     commands.addCommand(command, {
       caption: 'Show Dashboard',
       label: 'Dashboard',
-      icon: dashboardGreyIcon,
+      icon: dashboardOutlineGreyIcon,
       execute: () => {
         const content = new DashboardHomeWidget();
         const widget = new MainAreaWidget<DashboardHomeWidget>({ content });
         widget.title.label = 'Dashboard';
-        widget.title.icon = dashboardGreyIcon;
+        widget.title.icon = dashboardOutlineGreyIcon;
         app.shell.add(widget, 'main');
         tracker.add(widget);
       }

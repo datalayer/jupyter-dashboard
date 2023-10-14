@@ -2,6 +2,7 @@ import dashboardBlueIcon from '@datalayer/icons-react/data1/DashboardOutlineWhit
 import dashboardGreenIcon from '@datalayer/icons-react/data1/DashboardGreenIconJupyterLab';
 import dashboardGreyIcon from '@datalayer/icons-react/data1/DashboardGreyIconJupyterLab';
 import dashboardGreyOutlineIcon from '@datalayer/icons-react/data1/DashboardOutlineWhiteIconJupyterLab';
+import dashboardOutlineGreyIcon from '@datalayer/icons-react/data1/DashboardOutlineGreyIconJupyterLab';
 import dashboardWhiteIcon from '@datalayer/icons-react/data1/DashboardWhiteIconJupyterLab';
 import dashboardWhiteOutlineIcon from '@datalayer/icons-react/data1/DashboardOutlineWhiteIconJupyterLab';
 import dragIndicatorIcon from '@datalayer/icons-react/data1/DragIndicatorIconJupyterLab';
@@ -16,6 +17,7 @@ export {
   dashboardGreenIcon,
   dashboardGreyIcon,
   dashboardGreyOutlineIcon,
+  dashboardOutlineGreyIcon,
   dashboardWhiteIcon,
   dashboardWhiteOutlineIcon,
   dragIndicatorIcon,
