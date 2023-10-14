@@ -1,5 +1,5 @@
 import { JupyterFrontEnd, JupyterFrontEndPlugin } from '@jupyterlab/application';
-import { IDashboardTracker } from './../../editor/dashboard';
+import { IDashboardTracker } from '../editor/dashboard';
 import NotebookHeaderExtension from './NotebookHeaderExtension';
 
 export type JupyterFrontEndProps = {

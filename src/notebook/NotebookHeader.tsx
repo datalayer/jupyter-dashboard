@@ -3,21 +3,18 @@ import { useState, useEffect } from 'react';
 import { ThemeProvider, BaseStyles, Button, ButtonGroup, Box, Text, ActionList, ActionMenu, IconButton, Portal, registerPortalRoot, Spinner } from '@primer/react';
 import { toast, ToastContainer } from 'react-toastify';
 import { XIcon, KebabHorizontalIcon, PencilIcon, ArchiveIcon, TrashIcon, LinkExternalIcon, CheckIcon} from '@primer/octicons-react'
-import { JupyterBaseIcon, DashboardGreenIcon, EyesIcon } from '@datalayer/icons-react'
+import { DashboardGreenIcon } from '@datalayer/icons-react'
 import { JupyterFrontEnd } from '@jupyterlab/application';
 import { INotebookContent } from '@jupyterlab/nbformat';
 import { NotebookPanel } from '@jupyterlab/notebook';
-import { IDashboardTracker } from './../../editor/dashboard';
-import { CLASSIC_RENDER_WIDGET_FACTORY } from '../classic/plugin';
-import { VIEWER_WIDGET_FACTORY } from '../viewer/plugin';
-import { DashboardDocument } from './../../editor/dashboard';
-import { IDashboardLayout } from '../../render/types/DashboardTypes';
-import { IDashboardLayoutVariant } from '../../render/types/DashboardTypes';
-import { BlankLayout } from '../../render/layout/BlankLayout';
-import { SimpleLayout } from '../../render/layout/SimpleLayout';
-import { ArticleLayout } from '../../render/layout/ArticleLayout';
-import Identity from './Identity';
-import { requestAPI } from '../../jupyterlab/handler';
+import { IDashboardTracker } from '../editor/dashboard';
+import { DashboardDocument } from '../editor/dashboard';
+import { IDashboardLayout } from '../render/types/DashboardTypes';
+import { IDashboardLayoutVariant } from '../render/types/DashboardTypes';
+import { BlankLayout } from '../render/layout/BlankLayout';
+import { SimpleLayout } from '../render/layout/SimpleLayout';
+import { ArticleLayout } from '../render/layout/ArticleLayout';
+import { requestAPI } from '../jupyterlab/handler';
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -45,24 +42,6 @@ const NotebookHeader = (props: Props) => {
     registerPortalRoot(notebookPanel.node, previewPortalName);
     setNotebookPortalName(previewPortalName);
   }, [notebookPanel]);
-  const showClassicRender = () => {
-    commands.execute('docmanager:open', {
-      path: notebookPanel.context.path,
-      factory: CLASSIC_RENDER_WIDGET_FACTORY,
-      options: {
-        mode: 'split-right',
-      }
-    });
-  };
-  const showViewer = () => {
-    commands.execute('docmanager:open', {
-      path: notebookPanel.context.path,
-      factory: VIEWER_WIDGET_FACTORY,
-      options: {
-        mode: 'split-right',
-      }
-    });
-  };
   const showDashboard = () => {
     const dashboardPromise = commands.execute('docmanager:open', {
       path: notebookPanel.context.path.replace('.ipynb', '.dash'),
@@ -194,32 +173,11 @@ const NotebookHeader = (props: Props) => {
           <ToastContainer/>
             <Box m={3} display="flex" sx={{paddingTop: "20px"}}>
               <Box flexGrow={1}>
-                <Identity app={app}/>
               </Box>
               { !dashboardDocument
                 ?
                   <Box>
                     <ButtonGroup>
-                      <Button
-                        aria-label="Render classic"
-                        title="Render the classic way"
-                        size="small"
-                        variant="invisible"
-                        leadingVisual={() => <JupyterBaseIcon colored/>}
-                        onClick={e => { e.preventDefault(); showClassicRender()}}
-                      >
-                        Render classic
-                      </Button>
-                      <Button
-                        aria-label="View"
-                        title="View"
-                        size="small"
-                        variant="invisible"
-                        leadingVisual={() => <EyesIcon colored/>}
-                        onClick={e => { e.preventDefault(); showViewer()}}                
-                      >
-                        View static
-                      </Button>
                       <Button
                         aria-label="Publish as a Dashboard"
                         title="Publish as a Dashboard"

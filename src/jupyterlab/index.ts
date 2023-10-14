@@ -12,9 +12,7 @@ import { CodeCell } from '@jupyterlab/cells';
 import { INotebookTracker } from '@jupyterlab/notebook';
 import { undoIcon, redoIcon, copyIcon, cutIcon, pasteIcon, runIcon, saveIcon } from '@jupyterlab/ui-components';
 import { dashboardGreenIcon, dashboardGreyIcon, editIcon, viewIcon } from '../editor/icons';
-import notebookHeaderPlugin from '../notebook/header/plugin';
-import classicRenderPlugin from '../notebook/classic/plugin';
-import viewerPlugin from '../notebook/viewer/plugin';
+import notebookHeaderPlugin from '../notebook/plugin';
 import { DashboardArea, DashboardDocumentFactory, DashboardTracker, IDashboardTracker } from '../editor/dashboard';
 import { DashboardWidget } from '../editor/widget';
 import { DashboardModel, DashboardModelFactory } from '../editor/model';
@@ -92,7 +90,7 @@ const dashboardHomePlugin: JupyterFrontEndPlugin<void> = {
         );
       }
     );
-    console.log('JupyterLab plugin @datalayer/jupyter-dashboard:home is activated!');
+    console.log('JupyterLab plugin @datalayer/jupyter-dashboard:home:plugin is activated.');
   }
 };
 
@@ -659,8 +657,6 @@ namespace Private {
 }
 
 export default [
-  classicRenderPlugin,
-  viewerPlugin,
   notebookHeaderPlugin,
   dashboardHomePlugin,
   dashboardTrackerPlugin,

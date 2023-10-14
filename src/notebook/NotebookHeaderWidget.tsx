@@ -1,7 +1,7 @@
 import { JupyterFrontEnd } from '@jupyterlab/application';
 import { ReactWidget } from '@jupyterlab/apputils';
 import { NotebookPanel } from '@jupyterlab/notebook';
-import { IDashboardTracker } from './../../editor/dashboard';
+import { IDashboardTracker } from '../editor/dashboard';
 import NotebookHeader from './NotebookHeader';
 
 class NotebookHeaderWidget extends ReactWidget {

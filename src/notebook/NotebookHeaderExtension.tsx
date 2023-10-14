@@ -2,7 +2,7 @@ import { IDisposable, DisposableDelegate } from '@lumino/disposable';
 import { JupyterFrontEnd } from '@jupyterlab/application';
 import { DocumentRegistry } from '@jupyterlab/docregistry';
 import { NotebookPanel, INotebookModel } from '@jupyterlab/notebook';
-import { IDashboardTracker } from './../../editor/dashboard';
+import { IDashboardTracker } from '../editor/dashboard';
 import NotebookHeaderWidget from './NotebookHeaderWidget';
 
 export class NotebookHeaderExtension implements DocumentRegistry.IWidgetExtension<NotebookPanel, INotebookModel> {
@@ -16,7 +16,7 @@ export class NotebookHeaderExtension implements DocumentRegistry.IWidgetExtensio
 
   createNew(panel: NotebookPanel, _: DocumentRegistry.IContext<INotebookModel>): IDisposable {
     const notebookHeader = new NotebookHeaderWidget(this._app, this._dashboardTracker, panel);
-    notebookHeader.addClass('datalayer-NotebookPanel-header');
+    notebookHeader.addClass('dla-NotebookPanel-header');
     panel.contentHeader.insertWidget(0, notebookHeader);
     return new DisposableDelegate(() => {
       notebookHeader.dispose();
