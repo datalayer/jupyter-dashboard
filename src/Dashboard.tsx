@@ -31,11 +31,11 @@ const DashboardHome = observer((): JSX.Element => {
           <BaseStyles>
             <Box className="datalayer-Primer-Brand">
               <Box>
-                <UnderlineNav aria-current="page" aria-label="clouder">
-                  <UnderlineNav.Item aria-label="clouder" aria-current={appState.tab === 1 ? "page" : undefined} icon={DashboardGreenIcon} onSelect={e => {e.preventDefault(); appState.setTab(1);}}>
+                <UnderlineNav aria-current="page" aria-label="dashboard">
+                  <UnderlineNav.Item aria-label="dashboard-dashboard" aria-current={appState.tab === 1 ? "page" : undefined} icon={DashboardGreenIcon} onSelect={e => {e.preventDefault(); appState.setTab(1);}}>
                     Dashboard
                   </UnderlineNav.Item>
-                  <UnderlineNav.Item aria-label="about" aria-current={appState.tab === 2 ? "page" : undefined} icon={DashboardGreenIcon} onSelect={e => {e.preventDefault(); appState.setTab(2);}}>
+                  <UnderlineNav.Item aria-label="dashboard-about" aria-current={appState.tab === 2 ? "page" : undefined} icon={DashboardGreenIcon} onSelect={e => {e.preventDefault(); appState.setTab(2);}}>
                     About
                   </UnderlineNav.Item>
                 </UnderlineNav>

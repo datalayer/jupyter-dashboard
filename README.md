@@ -27,7 +27,7 @@ A [WYSIWYG](https://en.wikipedia.org/wiki/WYSIWYG) dashboard editor for JupyterL
 - [ ] Support ipywidgets with lite kernels
 - [ ] Support panel outpus with lite kernels
 - [ ] Versioning
-- [ ] Permissions
+- [ ] Permissions
 - [ ] Tracking system (like google-analytics) on the publication
 
 ## Develop

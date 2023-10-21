@@ -28,7 +28,7 @@ const AboutTab = (props: Props): JSX.Element => {
         </Link>
       </Box>
       <Box>
-        <Link href="https://github.com/datalayer/clouder" target="_blank">
+        <Link href="https://github.com/datalayer/jupyter-dashboard" target="_blank">
           <Text as="h4">Source code</Text>
         </Link>
       </Box>
