@@ -15,20 +15,21 @@ A [WYSIWYG](https://en.wikipedia.org/wiki/WYSIWYG) dashboard editor for JupyterL
 ## To Do
 
 - [ ] Associate one .dash with many .ipynb
+- [ ] Bokeh Support
 - [ ] Configurable Notebook Toolbar
-- [ ] Configurable S3 bucket
-- [ ] Custom layout
+- [ ] Configurable S3 Bucket
+- [ ] Custom Layout
 - [ ] Home page
-- [ ] More granular plugins
-- [ ] Render app based on https://github.com/react-grid-layout/react-grid-layout
-- [ ] Render app with ipywidgets support
-- [ ] Support .ipynb renames
-- [ ] Support input and outputs
-- [ ] Support ipywidgets with lite kernels
-- [ ] Support panel outpus with lite kernels
-- [ ] Versioning
+- [ ] IPyWidgets with lite Kernels
+- [ ] Input and Outputs Cells Support
+- [ ] More granular Plugins
+- [ ] Notebook Renaming
+- [ ] Panel with lite Kernels
 - [ ] Permissions
-- [ ] Tracking system (like google-analytics) on the publication
+- [ ] RenderApp based on [grid-layout](https://github.com/react-grid-layout/react-grid-layout)
+- [ ] RenderApp with IPyWidgets support
+- [ ] Tracking system (like Ggoogle Analytics) on the publication
+- [ ] Versioning
 
 ## Develop
 
