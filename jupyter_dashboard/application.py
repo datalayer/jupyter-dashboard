@@ -96,13 +96,9 @@ class DatalayerExampleApp(DatalayerApp):
     aliases = jupyter_dashboard_aliases
     flags = jupyter_dashboard_flags
 
-    cloud = Unicode("ovh", config=True, help="The app directory to build in")
+    cloud = Unicode("ovh", config=True, help="")
 
-    minimize = Bool(
-        True,
-        config=True,
-        help="Whether to minimize a production build (defaults to True).",
-    )
+    minimize = Bool(True, config=True, help="")
 
     subcommands = {
         "config": (DatalayerExampleConfigApp, DatalayerExampleConfigApp.description.splitlines()[0]),
