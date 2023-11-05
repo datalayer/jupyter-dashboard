@@ -70,7 +70,7 @@
     "watch:src": "tsc -w"
   },
   "dependencies": {
-    "@datalayer/jupyter-react": "0.7.14",
+    "@datalayer/jupyter-react": "0.8.0",
     "@jupyter/ydoc": "1.1.1",
     "@jupyterlab/application": "4.0.3",
     "@jupyterlab/apputils": "4.1.3",
