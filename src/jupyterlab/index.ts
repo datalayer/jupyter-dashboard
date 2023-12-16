@@ -67,7 +67,7 @@ const dashboardHomePlugin: JupyterFrontEndPlugin<void> = {
       launcher.add({
         command,
         category,
-        rank: 6.6,
+        rank: 6.3,
       });
     }
     if (settingRegistry) {
