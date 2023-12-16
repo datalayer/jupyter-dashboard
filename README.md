@@ -8,6 +8,10 @@
 
 A [WYSIWYG](https://en.wikipedia.org/wiki/WYSIWYG) dashboard editor for JupyterLab.
 
+Jupyter Dashboard allow Users to create and publish an interactive dashboard from Jupyter with drag-and-drop capabilities.
+
+This is usable by technical but also business Users that can just reuse a Notebook prepared by a technical User.
+
 <div align="center" style="text-align: center">
   <img alt="Jupyter Dashboard Editor" src="https://datalayer-jupyter-examples.s3.amazonaws.com/jupyter-dashboard-editor.gif" />
 </div>
