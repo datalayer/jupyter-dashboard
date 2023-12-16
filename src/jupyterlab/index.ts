@@ -49,13 +49,13 @@ const dashboardHomePlugin: JupyterFrontEndPlugin<void> = {
       });
     }
     commands.addCommand(command, {
-      caption: 'Show Dashboard',
-      label: 'Dashboard',
+      caption: 'Show Jupyter Dashboard',
+      label: 'Jupyter Dashboard',
       icon: dashboardOutlineGreyIcon,
       execute: () => {
         const content = new DashboardHomeWidget();
         const widget = new MainAreaWidget<DashboardHomeWidget>({ content });
-        widget.title.label = 'Dashboard';
+        widget.title.label = 'Jupyter Dashboard';
         widget.title.icon = dashboardOutlineGreyIcon;
         app.shell.add(widget, 'main');
         tracker.add(widget);
