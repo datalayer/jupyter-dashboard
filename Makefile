@@ -38,6 +38,14 @@ clean: ## clean
 build: ## build
 	yarn build
 
+build-prod: ## build-prod
+	git clean -fdx
+	python -m build
+
+build-prod: ## build-prod
+	git clean -fdx
+	python -m build
+
 publish: clean build ## publish
 	npm publish
 	echo open https://www.npmjs.com/package/@datalayer/jupyter-dashboard
