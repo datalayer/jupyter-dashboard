@@ -6,8 +6,6 @@ import { OutputViewer } from '@datalayer/jupyter-react/lib/components/viewer/out
 import { IDashboardLayout, IDashboardCell } from '../types/DashboardTypes';
 import { getDashboardCell } from '../specs/DashboardSpecs';
 
-import '@primer/react-brand/lib/css/main.css'
-
 export const BlankLayout = (props: BlankLayout.IConfig): JSX.Element => {
   const { notebook, layout, adaptPlotly } = props;
   const [dashCells, setDashCells] = useState<Array<IDashboardCell>>();

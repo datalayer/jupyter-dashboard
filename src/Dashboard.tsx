@@ -1,15 +1,11 @@
 import { useState, useEffect } from 'react';
 import { ThemeProvider, BaseStyles, Box } from '@primer/react';
 import { observer } from 'mobx-react';
-import { ThemeProvider as BrandThemeProvider } from '@primer/react-brand'
 import { UnderlineNav } from '@primer/react';
 import { DashboardGreenIcon } from '@datalayer/icons-react';
 import { requestAPI } from './jupyterlab/handler';
-import DashboardTab from './tabs/DashboardTab';
 import AboutTab from './tabs/AboutTab';
 import appState from "./state/mobx";
-
-import '@primer/react-brand/lib/css/main.css';
 
 const DashboardHome = observer((): JSX.Element => {
   const [version, setVersion] = useState('');
@@ -26,7 +22,6 @@ const DashboardHome = observer((): JSX.Element => {
   });
   return (
     <>
-      <BrandThemeProvider>
         <ThemeProvider>
           <BaseStyles>
             <Box className="datalayer-Primer-Brand">
@@ -41,13 +36,11 @@ const DashboardHome = observer((): JSX.Element => {
                 </UnderlineNav>
               </Box>
               <Box m={3}>
-                {(appState.tab === 1) && <DashboardTab/>}
                 {(appState.tab === 2) && <AboutTab version={version}/>}
               </Box>
             </Box>
           </BaseStyles>
         </ThemeProvider>
-      </BrandThemeProvider>
     </>
   );
 });
