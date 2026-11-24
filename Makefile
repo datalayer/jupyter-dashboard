@@ -17,14 +17,14 @@ help: ## display this help
 default: help ## default target is help
 
 env: warning ## env
-	micromamba env create -y -n ${ENV_NAME} -f environment.yml
+	conda env create -y -n ${ENV_NAME} -f environment.yml
 	@exec echo "-------------------------------------------------------"
-	@exec echo "micromamba activate ${ENV_NAME}"
+	@exec echo "conda activate ${ENV_NAME}"
 	@exec echo "-------------------------------------------------------"
 
 env-rm: warning ## env-rm
-	micromamba deactivate && \
-	micromamba remove -y --name ${ENV_NAME} --all || true
+	conda deactivate && \
+	conda remove -y --name ${ENV_NAME} --all || true
 
 kill:
 	./dev/utils/kill.sh
@@ -33,10 +33,10 @@ warning:
 	echo "\x1b[34m\x1b[43mEnsure you have run \x1b[1;37m\x1b[41m conda deactivate \x1b[22m\x1b[34m\x1b[43m before invoking this.\x1b[0m"
 
 clean: ## clean
-	yarn clean
+	npm clean
 
 build: ## build
-	yarn build
+	npm run build
 
 build-prod: ## build-prod
 	git clean -fdx
@@ -52,7 +52,7 @@ publish: clean build ## publish
 
 typedoc: ## generate typedoc
 	rm -fr typedoc && \
-	yarn typedoc --tsconfig ./tsconfig.json && \
+	npm typedoc --tsconfig ./tsconfig.json && \
 	open typedoc/index.html
 
 publish-typedoc: typedoc ## deploy typedoc
@@ -73,7 +73,7 @@ publish-typedoc: typedoc ## deploy typedoc
 
 build-render: ## build-render
 	($(CONDA_ACTIVATE) ${ENV_NAME}; \
-		yarn render:build )
+		npm render:build )
 
 publish-render: build-render ## publish-render
 	($(CONDA_ACTIVATE) ${ENV_NAME}; \

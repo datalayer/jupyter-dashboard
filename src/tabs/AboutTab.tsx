@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Pagehead, Label, Text, Link, Box } from '@primer/react';
-import { ECharlesIcon } from '@datalayer/icons-react/eggs';
+import { PageHeader, Label, Text, Link, Box } from '@primer/react';
+import { SkubbleIcon } from '@datalayer/icons-react/eggs';
 
 type Props = {
   version: string;
@@ -11,7 +11,7 @@ const AboutTab = (props: Props): JSX.Element => {
   const [egg, setEgg] = useState(false);
   return (
     <>
-      <Pagehead as="h2">🪐 🏄 Jupyter Dashboard<Label sx={{marginLeft: 1}}>{version}</Label></Pagehead>
+      <PageHeader as="h2">🪐 🏄 Jupyter Dashboard<Label sx={{marginLeft: 1}}>{version}</Label></PageHeader>
       <Box>
         <Text>Create and publish Dashboard from Jupyter.</Text>
       </Box>
@@ -23,7 +23,7 @@ const AboutTab = (props: Props): JSX.Element => {
             style={{ width: '100%' }}
           />
         ) : (
-          <ECharlesIcon size={300} onClick={e => setEgg(false)} />
+          <SkubbleIcon size={300} onClick={e => setEgg(false)} />
         )}
       </Box>
       <Box>

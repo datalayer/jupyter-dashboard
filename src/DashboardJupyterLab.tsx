@@ -6,7 +6,7 @@ import * as dashboardExtension from './jupyterlab/index';
 
 const JupyterLabComponent = () => (
   <JupyterLabApp
-    extensions={[
+    plugins={[
       lightThemeExtension,
       collaborationExtension,
       dashboardExtension,
